@@ -14,7 +14,6 @@ import (
 // @title go-genai-demo
 // @version 1.0
 // @description go-genai-demo
-// @host localhost:8910
 // @BasePath /api
 func main() {
 	env := os.Getenv("ENV")
