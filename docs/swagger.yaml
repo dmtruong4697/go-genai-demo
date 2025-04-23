@@ -7,7 +7,6 @@ definitions:
     required:
     - prompt
     type: object
-host: localhost:8910
 info:
   contact: {}
   description: go-genai-demo
@@ -54,9 +53,9 @@ paths:
     post:
       consumes:
       - application/json
-      description: Trả lời prompt bằng cách stream phản hồi từ Gemini
+      description: stream phản hồi
       parameters:
-      - description: Prompt gửi tới Gemini
+      - description: prompt gửi tới gemini
         in: body
         name: request
         required: true

@@ -6,7 +6,6 @@
         "contact": {},
         "version": "1.0"
     },
-    "host": "localhost:8910",
     "basePath": "/api",
     "paths": {
         "/chat": {
@@ -66,7 +65,7 @@
         },
         "/chat/stream": {
             "post": {
-                "description": "Trả lời prompt bằng cách stream phản hồi từ Gemini",
+                "description": "stream phản hồi",
                 "consumes": [
                     "application/json"
                 ],
@@ -79,7 +78,7 @@
                 "summary": "Chat streaming",
                 "parameters": [
                     {
-                        "description": "Prompt gửi tới Gemini",
+                        "description": "prompt gửi tới gemini",
                         "name": "request",
                         "in": "body",
                         "required": true,
