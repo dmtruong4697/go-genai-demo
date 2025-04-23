@@ -1,0 +1,87 @@
+basePath: /api
+definitions:
+  models.ChatRequest:
+    properties:
+      prompt:
+        type: string
+    required:
+    - prompt
+    type: object
+host: localhost:8910
+info:
+  contact: {}
+  description: go-genai-demo
+  title: go-genai-demo
+  version: "1.0"
+paths:
+  /chat:
+    post:
+      consumes:
+      - application/json
+      description: simple question (one-turn)
+      parameters:
+      - description: prompt
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.ChatRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: chat one turn
+      tags:
+      - chat
+  /chat/stream:
+    post:
+      consumes:
+      - application/json
+      description: Trả lời prompt bằng cách stream phản hồi từ Gemini
+      parameters:
+      - description: Prompt gửi tới Gemini
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.ChatRequest'
+      produces:
+      - text/event-stream
+      responses:
+        "200":
+          description: Streaming response
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Chat streaming
+      tags:
+      - chat
+swagger: "2.0"

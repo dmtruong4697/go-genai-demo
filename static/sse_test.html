@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Test Gemini SSE Stream</title>
+  <style>
+    body {
+      font-family: monospace;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h2>Streaming Response:</h2>
+  <div id="result"></div>
+
+  <script>
+    const prompt = "Giới thiệu về sao Hỏa";
+
+    const eventSource = new EventSource("http://localhost:8910/api/chat/stream", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ prompt })
+    });
+
+    eventSource.onmessage = function(event) {
+      document.getElementById("result").textContent += event.data + "\n";
+    };
+
+    eventSource.onerror = function(error) {
+      console.error("Error occurred: ", error);
+    };
+  </script>
+</body>
+</html>
