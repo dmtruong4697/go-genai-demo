@@ -17,29 +17,29 @@ import (
 // @host localhost:8910
 // @BasePath /api
 func main() {
-      env := os.Getenv("ENV")
-      if env == "" {
-            env = "dev"
-      }
-      envFile := ".env." + env
+	env := os.Getenv("ENV")
+	if env == "" {
+		env = "dev"
+	}
+	envFile := ".env." + env
 
-      if err := godotenv.Load(envFile); err != nil {
-            log.Fatalf("Error loading %s file: %v", envFile, err)
-      }
+	if err := godotenv.Load(envFile); err != nil {
+		log.Printf("⚠️  Warning: Could not load %s. Using system environment variables.", envFile)
+	}
 
-      port := os.Getenv("PORT")
-      if port == "" {
-            port = "8910"
-      }
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8910"
+	}
 
-      r := gin.Default()
+	r := gin.Default()
 
 	r.Static("/static", "./static")
 
-      routes.SetupRoutes(r)
+	routes.SetupRoutes(r)
 
-      log.Printf("Server running on port %s...", port)
-      if err := r.Run(":" + port); err != nil {
-            log.Fatal("Failed to start server: ", err)
-      }
+	log.Printf("🚀 Server running on port %s...", port)
+	if err := r.Run(":" + port); err != nil {
+		log.Fatal("❌ Failed to start server: ", err)
+	}
 }
