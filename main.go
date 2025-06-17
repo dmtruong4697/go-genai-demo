@@ -33,7 +33,8 @@ func main() {
 
 	r := gin.Default()
 
-	r.Static("/static", "./static")
+	// r.Static("/static", "./static")
+	r.Static("/", "./publics")
 
 	routes.SetupRoutes(r)
 
